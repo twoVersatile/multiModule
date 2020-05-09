@@ -1,0 +1,11 @@
+server:
+    port: 60000
+
+swagger:
+    title: Ekart Transport Connection Manager Server
+    reason: Transport Connection Manager Server
+    version: 0.0.1
+    termsOfServiceUrl: http://jhipster.github.io/
+    contact:
+    license: Apache 2.0
+    licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.html

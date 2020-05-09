@@ -1,0 +1,16 @@
+apply plugin: 'org.springframework.boot'
+
+ext {
+    logbackLoglevel = "INFO"
+    logpath = "/tmp/cartServer"
+}
+
+bootRun {
+    args = ["--spring.profiles.active=test"]
+}
+
+task setProdProperties(dependsOn: bootRun) {
+    doFirst {
+        System.setProperty('spring.profiles.active', 'test')
+    }
+}

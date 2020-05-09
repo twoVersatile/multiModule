@@ -1,0 +1,13 @@
+rootProject.name = 'multiModule'
+include 'cartManager'
+include 'common-datatypes'
+include 'cartManager:cartManager-datatypes'
+include 'cartManager:cartServer'
+include 'userManager'
+include 'userManager:userManager-datatypes'
+include 'userManager:userManager-server'
+findProject(':cartManager:cartServer')?.name = 'cartServer'
+findProject(':userManager:userManager-datatypes')?.name = 'userManager-datatypes'
+findProject(':userManager:userManager-server')?.name = 'userManager-server'
+findProject(':cartManager:cartManager-datatypes')?.name = 'cartManager-datatypes'
+
