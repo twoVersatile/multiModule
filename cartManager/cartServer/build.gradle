@@ -97,6 +97,7 @@ allprojects {
 
         // Lombok
         compile group: 'org.projectlombok', name: 'lombok', version: lombok_version
+        annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombok_version
 
         // Joda Time
         compile group: 'joda-time', name: 'joda-time', version: joda_time_version
