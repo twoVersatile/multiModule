@@ -27,6 +27,7 @@ dependencies {
 
     // Lombok
     compile group: 'org.projectlombok', name: 'lombok', version: lombok_version
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombok_version
 
     //Spring Framework for HttpStatus
     compile group: 'org.springframework', name: 'spring-web', version: springframework_web_version

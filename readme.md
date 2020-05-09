@@ -7,3 +7,8 @@
 3) userManager
     1) userManager-datatypes
     2) userManager-server
+
+
+##How to run
+    1) cd <package>/<package>-server
+    2) ./gradlew bootrun
