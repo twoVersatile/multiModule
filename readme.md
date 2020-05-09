@@ -1,4 +1,4 @@
-##Sample multi module Spring Project.
+## Sample multi module Spring Project.
 
 1) common-datatypes
 2) cartManager
@@ -9,6 +9,6 @@
     2) userManager-server
 
 
-##How to run
+## How to run
     1) cd <package>/<package>-server
     2) ./gradlew bootrun
