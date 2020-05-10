@@ -25,14 +25,14 @@ public class UserServiceClient extends BaseClient {
         String url = baseUrl + String.format(GET_USER_BY_ID, userId);
 
         Map<String, Object> headerMap = new HashMap<>();
+
         com.sun.jersey.api.client.ClientResponse response = null;
         try {
             response = call(url, MediaType.APPLICATION_JSON_TYPE, CallType.GET, null, headerMap);
 
             if (response != null && response.hasEntity()) {
                 UserResponse userResponse =
-                    response.getEntity(new GenericType<UserResponse>() {
-                    });
+                    response.getEntity(UserResponse.class);
                 return userResponse;
             } else {
                 throw new RuntimeException("Failed to get user Details");
