@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenLocal()
         mavenCentral()
     }
 
@@ -20,6 +21,7 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -27,7 +29,6 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
-//------------
 
 allprojects {
     apply plugin: 'org.springframework.boot'
@@ -38,6 +39,7 @@ allprojects {
     targetCompatibility = 1.8
 
     repositories {
+        mavenLocal()
         mavenCentral()
     }
 
@@ -62,9 +64,10 @@ allprojects {
 
         compile project(':cartManager:cartManager-datatypes')
         compile project(':common-datatypes')
-        compile project(':userManager:userManager-client')
-        compile project(':userManager:userManager-datatypes')
-
+        //compile project(':userManager:userManager-client')
+        //compile project(':userManager:userManager-datatypes')
+        compile group:'com.example.cart.service', name: 'userManager-datatypes', version: '1.0-SNAPSHOT'
+        compile group:'com.example.cart.service', name: 'userManager-client', version: '1.0-SNAPSHOT'
         // Spring Boot Related
         compile group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: spring_boot_version
         compile group: 'org.springframework.boot', name: 'spring-boot-loader-tools', version: spring_boot_version
