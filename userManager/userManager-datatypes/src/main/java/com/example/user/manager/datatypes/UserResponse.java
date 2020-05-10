@@ -17,6 +17,7 @@ public class UserResponse {
     private Long id;
     private String userId;
     private Long age;
+    private UserState userState;
     private String name;
     private Gender gender;
 }

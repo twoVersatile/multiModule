@@ -10,4 +10,6 @@ findProject(':cartManager:cartServer')?.name = 'cartServer'
 findProject(':userManager:userManager-datatypes')?.name = 'userManager-datatypes'
 findProject(':userManager:userManager-server')?.name = 'userManager-server'
 findProject(':cartManager:cartManager-datatypes')?.name = 'cartManager-datatypes'
+include 'userManager:userManager-client'
+findProject(':userManager:userManager-client')?.name = 'userManager-client'
 

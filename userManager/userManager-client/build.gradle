@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'maven'
+}
+
+group 'com.example.cart.service'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':userManager:userManager-datatypes')
+    compile project(':common-datatypes')
+    // Jersey
+    compile group: 'com.sun.jersey', name: 'jersey-client', version: jersey_version
+    // apache
+    compile group: 'commons-lang', name: 'commons-lang', version: commons_lang
+    // SLF4j
+    compile group: 'org.slf4j', name: 'slf4j-api', version: slf4j_version
+    compile group: 'org.slf4j', name: 'log4j-over-slf4j', version: slf4j_version
+    compile group: 'org.slf4j', name: 'jul-to-slf4j', version: slf4j_version
+    // Lombok
+    compile group: 'org.projectlombok', name: 'lombok', version: lombok_version
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombok_version
+}

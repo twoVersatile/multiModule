@@ -6,5 +6,5 @@ import com.example.cart.service.server.entity.Cart;
 public interface CartService {
     Cart getCartById(Long cartId);
 
-    Cart createCart(CreateCartRequest createCartRequest);
+    Cart createCart(CreateCartRequest createCartRequest) throws Exception;
 }

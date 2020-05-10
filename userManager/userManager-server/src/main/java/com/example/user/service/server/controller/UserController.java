@@ -35,14 +35,18 @@ public class UserController {
         @PathVariable(value = "userId") String userId
     ) throws Exception {
         User user = userService.getUser(userId);
-        UserResponse userResponse = new UserResponse();
 
-        userResponse.setId(user.getId());
-        userResponse.setName(user.getName());
-        userResponse.setAge(user.getAge());
-        userResponse.setGender(user.getGender());
-        userResponse.setUserId(user.getUserId());
+        UserResponse userResponse = null;
 
+        if (user != null) {
+            userResponse = new UserResponse();
+            userResponse.setId(user.getId());
+            userResponse.setName(user.getName());
+            userResponse.setAge(user.getAge());
+            userResponse.setGender(user.getGender());
+            userResponse.setUserState(user.getUserState());
+            userResponse.setUserId(user.getUserId());
+        }
         return new ResponseEntity(userResponse, HttpStatus.OK);
 
     }
@@ -57,13 +61,17 @@ public class UserController {
     ) throws Exception {
         User user = userService.createUser(createUserRequest);
 
-        UserResponse userResponse = new UserResponse();
+        UserResponse userResponse = null;
 
-        userResponse.setId(user.getId());
-        userResponse.setName(user.getName());
-        userResponse.setAge(user.getAge());
-        userResponse.setGender(user.getGender());
-        userResponse.setUserId(user.getUserId());
+        if (user != null) {
+            userResponse = new UserResponse();
+            userResponse.setId(user.getId());
+            userResponse.setName(user.getName());
+            userResponse.setAge(user.getAge());
+            userResponse.setGender(user.getGender());
+            userResponse.setUserState(user.getUserState());
+            userResponse.setUserId(user.getUserId());
+        }
 
         return new ResponseEntity(userResponse, HttpStatus.OK);
     }
