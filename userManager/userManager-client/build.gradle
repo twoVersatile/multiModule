@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'idea'
     id 'maven'
+    id 'maven-publish'
 }
 
 group 'com.example.cart.service'
@@ -10,12 +11,51 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
+    mavenLocal()
     mavenCentral()
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+    archiveClassifier = "sources"
+}
+
+publishing {
+    publications {
+        myPublication(MavenPublication) {
+            from components.java
+            artifact sourceJar
+            pom {
+                name = "User Service Client"
+                description = "Client for User Service"
+                url = "http://github.com/twoVersatile/multiModule"
+                licenses {
+                    license {
+                        name = "The Apache License, Version 2.0"
+                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                    }
+                }
+                developers {
+                    developer {
+                        id = "sinsuren"
+                        name = "Surender Singh"
+                        email = "surender.s@example.com"
+                    }
+                }
+                scm {
+                    connection = "http://github.com/twoVersatile/multiModule"
+                    developerConnection = "http://github.com/twoVersatile/multiModule"
+                    url = "http://github.com/twoVersatile/multiModule"
+                }
+            }
+        }
+    }
 }
 
 dependencies {
     compile project(':userManager:userManager-datatypes')
     compile project(':common-datatypes')
+
     // Jersey
     compile group: 'com.sun.jersey', name: 'jersey-client', version: jersey_version
     // apache
