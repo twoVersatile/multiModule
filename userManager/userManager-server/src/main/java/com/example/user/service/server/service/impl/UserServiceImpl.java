@@ -9,6 +9,8 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import static com.example.user.manager.datatypes.UserState.ACTIVE;
+
 @Component
 public class UserServiceImpl implements UserService {
 
@@ -31,6 +33,15 @@ public class UserServiceImpl implements UserService {
         user.setUserState(UserState.UN_VERIFIED);
         user.setCreatedAt(new DateTime());
         user.setCreatedBy(request.getName());
+
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User activateUser(String userId) {
+        User user = userRepository.findUserByUserId(userId);
+
+        user.setUserState(ACTIVE);
 
         return userRepository.save(user);
     }

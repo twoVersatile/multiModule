@@ -45,7 +45,7 @@ public class CartServiceImpl implements CartService {
         UserResponse userResponse = userService.getUser(userId);
 
         if (!userResponse.getUserState().equals(UserState.ACTIVE)) {
-            throw new Exception("User is not active");
+            userService.activateUser(userId);
         }
     }
 

@@ -7,4 +7,6 @@ public interface UserService {
     User getUser(String userId);
 
     User createUser(CreateUserRequest request);
+
+    User activateUser(String userId);
 }
