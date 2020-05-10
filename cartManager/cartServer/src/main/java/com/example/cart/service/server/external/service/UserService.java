@@ -7,6 +7,7 @@ import com.example.user.service.client.UserServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class UserService {
 
@@ -29,6 +30,17 @@ public class UserService {
         createUserRequest.setUserId(userId);
 
         UserResponse userResponse = userServiceClient.createUser(createUserRequest);
+
         return userResponse;
     }
+
+    public UserResponse activateUser(String userId) throws Exception {
+
+        UserResponse userResponse = userServiceClient.activateUser(userId);
+
+        return userResponse;
+
+    }
+
+
 }

@@ -6,6 +6,7 @@ import com.example.user.manager.datatypes.CreateUserRequest;
 import com.example.user.manager.datatypes.UserResponse;
 import com.example.user.service.server.entity.User;
 import com.example.user.service.server.service.UserService;
+import com.example.user.service.server.util.Mapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
@@ -36,19 +37,9 @@ public class UserController {
     ) throws Exception {
         User user = userService.getUser(userId);
 
-        UserResponse userResponse = null;
+        UserResponse userResponse = Mapper.mapToResponse(user);
 
-        if (user != null) {
-            userResponse = new UserResponse();
-            userResponse.setId(user.getId());
-            userResponse.setName(user.getName());
-            userResponse.setAge(user.getAge());
-            userResponse.setGender(user.getGender());
-            userResponse.setUserState(user.getUserState());
-            userResponse.setUserId(user.getUserId());
-        }
         return new ResponseEntity(userResponse, HttpStatus.OK);
-
     }
 
 
@@ -61,18 +52,21 @@ public class UserController {
     ) throws Exception {
         User user = userService.createUser(createUserRequest);
 
-        UserResponse userResponse = null;
-
-        if (user != null) {
-            userResponse = new UserResponse();
-            userResponse.setId(user.getId());
-            userResponse.setName(user.getName());
-            userResponse.setAge(user.getAge());
-            userResponse.setGender(user.getGender());
-            userResponse.setUserState(user.getUserState());
-            userResponse.setUserId(user.getUserId());
-        }
+        UserResponse userResponse = Mapper.mapToResponse(user);
 
         return new ResponseEntity(userResponse, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/activate/{userId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Metered(name = "activateUser", absolute = true)
+    public ResponseEntity activateUser(@PathVariable(value = "userId") String userId)
+        throws Exception {
+
+        User user = userService.activateUser(userId);
+
+        UserResponse userResponse = Mapper.mapToResponse(user);
+
+        return new ResponseEntity(userResponse, HttpStatus.CREATED);
     }
 }

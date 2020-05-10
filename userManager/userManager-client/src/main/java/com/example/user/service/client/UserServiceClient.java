@@ -13,6 +13,7 @@ import java.util.Map;
 public class UserServiceClient extends BaseClient {
     private static final String GET_USER_BY_ID = "/user/%s";
     private static final String CREATE_USER = "/user";
+    private static final String ACTIVATE_USER = "/user/activate/%s";
 
     private String baseUrl;
 
@@ -61,6 +62,34 @@ public class UserServiceClient extends BaseClient {
                 throw new RuntimeException("Failed to get user Details");
             }
         } finally {
+            if (response != null) {
+                response.close();
+            }
+        }
+    }
+
+    public UserResponse activateUser(String userId) throws Exception {
+        String url = baseUrl + String.format(ACTIVATE_USER, userId);
+
+        Map<String, Object> headerMap = new HashMap<>();
+
+        com.sun.jersey.api.client.ClientResponse response = null;
+
+        try {
+            response = call(url, MediaType.APPLICATION_JSON_TYPE, CallType.PUT, null, headerMap);
+
+            if (response != null && response.hasEntity()) {
+
+                UserResponse userResponse = response.getEntity(UserResponse.class);
+
+                return userResponse;
+            } else {
+                throw new RuntimeException("Failed to activate the user");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to activate the user");
+        } finally {
+
             if (response != null) {
                 response.close();
             }
