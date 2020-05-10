@@ -7,7 +7,6 @@ import com.example.user.service.client.UserServiceClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.jws.soap.SOAPBinding;
 
 @Component
 public class UserService {
