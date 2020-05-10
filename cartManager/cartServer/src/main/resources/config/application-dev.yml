@@ -21,19 +21,19 @@ spring:
     show_sql: true
     generate-ddl: true
     hibernate:
-        ddl-auto: update
-        naming_strategy: org.hibernate.cfg.EJB3NamingStrategy
-        use-new-id-generator-mappings: true
+      ddl-auto: update
+      naming_strategy: org.hibernate.cfg.EJB3NamingStrategy
+      use-new-id-generator-mappings: true
     properties:
-        hibernate.cache.use_second_level_cache: false
-        hibernate.cache.use_query_cache: false
-        hibernate.generate_statistics: false
-        org.hibernate.envers.audit_table_suffix: _history
-        hibernate.jdbc.batch_size: 100
-        hibernate.enable_lazy_load_no_trans: true
-        hibernate.order_inserts: true
-        hibernate.order_updates: true
-        hibernate.jdbc.batch_versioned_data: true
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+      org.hibernate.envers.audit_table_suffix: _history
+      hibernate.jdbc.batch_size: 100
+      hibernate.enable_lazy_load_no_trans: true
+      hibernate.order_inserts: true
+      hibernate.order_updates: true
+      hibernate.jdbc.batch_versioned_data: true
 
 endpoints.health.sensitive: false
 
@@ -47,3 +47,7 @@ logback:
 
 logging:
   config: src/main/resources/logback-spring.xml
+
+user.service:
+  host: localhost
+  port: 60000
