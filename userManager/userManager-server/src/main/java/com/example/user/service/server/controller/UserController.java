@@ -3,6 +3,7 @@ package com.example.user.service.server.controller;
 import com.codahale.metrics.annotation.Metered;
 import com.codahale.metrics.annotation.Timed;
 import com.example.user.manager.datatypes.CreateUserRequest;
+import com.example.user.manager.datatypes.UpdateUserRequest;
 import com.example.user.manager.datatypes.UserResponse;
 import com.example.user.service.server.entity.User;
 import com.example.user.service.server.service.UserService;
@@ -69,4 +70,21 @@ public class UserController {
 
         return new ResponseEntity(userResponse, HttpStatus.CREATED);
     }
+
+    @RequestMapping(value = "/{userId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Transactional
+    @Metered(name = "updateUserDetails", absolute = true)
+    public ResponseEntity updateUserDetails(
+        @RequestBody @ApiParam(value = "Update user request", required = true)
+        @Valid UpdateUserRequest updateUserRequest,
+        @PathVariable(value = "userId") String userId
+    ) throws Exception {
+        User user = userService.updateUser(updateUserRequest, userId);
+
+        UserResponse userResponse = Mapper.mapToResponse(user);
+
+        return new ResponseEntity(userResponse, HttpStatus.OK);
+    }
+
 }

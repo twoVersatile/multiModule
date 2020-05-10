@@ -1,6 +1,7 @@
 package com.example.user.service.server.service.impl;
 
 import com.example.user.manager.datatypes.CreateUserRequest;
+import com.example.user.manager.datatypes.UpdateUserRequest;
 import com.example.user.manager.datatypes.UserState;
 import com.example.user.service.server.entity.User;
 import com.example.user.service.server.repository.UserRepository;
@@ -8,6 +9,8 @@ import com.example.user.service.server.service.UserService;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Objects;
 
 import static com.example.user.manager.datatypes.UserState.ACTIVE;
 
@@ -42,6 +45,23 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findUserByUserId(userId);
 
         user.setUserState(ACTIVE);
+
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User updateUser(UpdateUserRequest updateUserRequest, String userId) {
+
+        User user = userRepository.findUserByUserId(userId);
+
+        if (user == null) {
+            throw new RuntimeException("User doesn't exist");
+        }
+
+        user.setName(updateUserRequest.getName());
+        if (Objects.nonNull(updateUserRequest.getAge())) {
+            user.setAge(updateUserRequest.getAge());
+        }
 
         return userRepository.save(user);
     }
