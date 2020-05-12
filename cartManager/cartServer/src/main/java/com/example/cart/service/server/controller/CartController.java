@@ -6,6 +6,7 @@ import com.example.cart.service.datatypes.CartResponse;
 import com.example.cart.service.datatypes.CreateCartRequest;
 import com.example.cart.service.server.entity.Cart;
 import com.example.cart.service.server.service.CartService;
+import com.example.cart.service.server.util.Mapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/cart")
@@ -54,4 +57,22 @@ public class CartController {
 
         return new ResponseEntity(cartResponse, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Metered(name = "getCartOfUser", absolute = true)
+    @Transactional
+    public ResponseEntity userCartDetails(
+        @PathVariable(value = "userId") String userId
+    ) throws Exception {
+
+        List<Cart> userCarts = cartService.userCartDetails(userId);
+
+        List<CartResponse> cartResponse = Mapper.parse(userCarts);
+
+
+        return new ResponseEntity(cartResponse, HttpStatus.OK);
+
+    }
+
 }
