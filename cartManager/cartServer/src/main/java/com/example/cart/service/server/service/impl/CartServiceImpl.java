@@ -12,6 +12,8 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class CartServiceImpl implements CartService {
     @Autowired
@@ -47,6 +49,13 @@ public class CartServiceImpl implements CartService {
         if (!userResponse.getUserState().equals(UserState.ACTIVE)) {
             userService.activateUser(userId);
         }
+    }
+
+    @Override
+    public List<Cart> userCartDetails(String userId) {
+        List<Cart> userCarts = cartRepository.findCartOfUser(userId);
+
+        return userCarts;
     }
 
 }
