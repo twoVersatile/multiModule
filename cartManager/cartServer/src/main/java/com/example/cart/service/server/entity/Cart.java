@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,4 +24,8 @@ public class Cart extends BaseEntity {
 
     @Column(name = "user_id", nullable = false)
     protected String userId;
+
+    @Transient
+    @OneToMany(cascade = CascadeType.REMOVE,  fetch = FetchType.LAZY)
+    protected List<Item> items;
 }
