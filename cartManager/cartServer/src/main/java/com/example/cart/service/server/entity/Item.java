@@ -26,6 +26,6 @@ public class Item extends BaseEntity {
     protected Long price;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "cart_id")
+    @JoinColumn(name = "cart_id", nullable = false)
     protected Cart cartId;
 }
