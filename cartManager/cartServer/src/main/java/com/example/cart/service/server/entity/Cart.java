@@ -26,6 +26,6 @@ public class Cart extends BaseEntity {
     protected String userId;
 
     @Transient
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "cartId")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "cartId")
     protected List<Item> items;
 }
