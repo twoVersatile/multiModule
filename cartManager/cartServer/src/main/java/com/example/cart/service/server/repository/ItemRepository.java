@@ -10,5 +10,5 @@ import java.util.List;
 public interface ItemRepository extends CrudRepository<Item, Long> {
 
     @Query(value = "select i from Item i where i.cartId = :cartId")
-    List<Item> itemsForCartId(@Param("cartId")String cartId);
+    List<Item> itemsForCartId(@Param("cartId") String cartId);
 }
