@@ -16,7 +16,7 @@ import javax.persistence.*;
 @DynamicUpdate
 public class Item extends BaseEntity {
 
-    @Column(name = "item_name", nullable = false, length = 10)
+    @Column(name = "item_name", nullable = false, length = 50)
     protected String name;
 
     @Column(name = "item_quantity", nullable = false, length = 10)

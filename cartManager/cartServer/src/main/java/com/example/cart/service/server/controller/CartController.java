@@ -4,8 +4,10 @@ import com.codahale.metrics.annotation.Metered;
 import com.codahale.metrics.annotation.Timed;
 import com.example.cart.service.datatypes.CartResponse;
 import com.example.cart.service.datatypes.CreateCartRequest;
+import com.example.cart.service.datatypes.ItemDetail;
 import com.example.cart.service.server.entity.Cart;
 import com.example.cart.service.server.service.CartService;
+import com.example.cart.service.server.service.ItemService;
 import com.example.cart.service.server.util.Mapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
@@ -29,6 +31,9 @@ public class CartController {
 
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private ItemService itemService;
 
     @RequestMapping(value = "/{cartId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
@@ -70,9 +75,21 @@ public class CartController {
 
         List<CartResponse> cartResponse = Mapper.parse(userCarts);
 
-
         return new ResponseEntity(cartResponse, HttpStatus.OK);
+    }
 
+    @RequestMapping(value = "/item/{cartId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Metered(name = "addItem", absolute = true)
+    public ResponseEntity addItemToCart(
+        @RequestBody @ApiParam(value = "ItemDetails", required = true)
+        @Valid ItemDetail itemDetail,
+        @PathVariable(value = "cartId") String cartId
+    ) throws Exception {
+
+        itemService.addToCart(itemDetail, Long.parseLong(cartId));
+
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 }
