@@ -47,6 +47,7 @@ public class UserController {
     @RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     @Metered(name = "createUser", absolute = true)
+    @Transactional
     public ResponseEntity createUser(
         @RequestBody @ApiParam(value = "Create user request", required = true)
         @Valid CreateUserRequest createUserRequest

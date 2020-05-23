@@ -5,7 +5,9 @@ import com.example.user.manager.datatypes.UpdateUserRequest;
 import com.example.user.manager.datatypes.UserState;
 import com.example.user.service.server.entity.User;
 import com.example.user.service.server.repository.UserRepository;
+import com.example.user.service.server.scheduler.service.SchedulerService;
 import com.example.user.service.server.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,6 +17,7 @@ import java.util.Objects;
 import static com.example.user.manager.datatypes.UserState.ACTIVE;
 
 @Component
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     @Autowired
