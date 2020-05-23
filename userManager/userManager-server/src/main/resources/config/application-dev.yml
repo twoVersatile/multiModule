@@ -37,9 +37,7 @@ spring:
 
 endpoints.health.sensitive: false
 
-health:
-  rotationConfig:
-    persistentFilePath: /tmp/temp.log
+health.rotationConfig.persistentFilePath: /tmp/temp.log
 
 logback:
   logPath: /tmp/
@@ -47,3 +45,4 @@ logback:
 
 logging:
   config: src/main/resources/logback-spring.xml
+
