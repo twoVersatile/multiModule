@@ -46,3 +46,6 @@ logback:
 logging:
   config: src/main/resources/logback-spring.xml
 
+quartz:
+  enabled: true
+  path: "src/main/resources/quartz.properties"
