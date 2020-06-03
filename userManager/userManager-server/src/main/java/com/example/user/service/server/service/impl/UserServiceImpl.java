@@ -1,11 +1,11 @@
 package com.example.user.service.server.service.impl;
 
+import com.codahale.metrics.Counter;
 import com.example.user.manager.datatypes.CreateUserRequest;
 import com.example.user.manager.datatypes.UpdateUserRequest;
 import com.example.user.manager.datatypes.UserState;
 import com.example.user.service.server.entity.User;
 import com.example.user.service.server.repository.UserRepository;
-import com.example.user.service.server.scheduler.service.SchedulerService;
 import com.example.user.service.server.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
@@ -22,6 +22,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private Counter counter;
 
     @Override
     public User getUser(String userId) {
@@ -40,6 +43,7 @@ public class UserServiceImpl implements UserService {
         user.setCreatedAt(new DateTime());
         user.setCreatedBy(request.getName());
 
+        counter.inc();
         return userRepository.save(user);
     }
 

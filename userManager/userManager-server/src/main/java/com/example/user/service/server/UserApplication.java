@@ -1,5 +1,6 @@
 package com.example.user.service.server;
 
+import com.codahale.metrics.Counter;
 import com.codahale.metrics.JmxReporter;
 import com.codahale.metrics.MetricRegistry;
 import com.example.cart.service.common.datatypes.Constants;
@@ -107,6 +108,14 @@ public class UserApplication {
         return registration;
     }
 */
+
+
+    @Bean
+    public Counter createCounter() {
+        Counter counter = registry.counter("com.sample.counter");
+
+        return counter;
+    }
 
     @Primary
     @Bean
